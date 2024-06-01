@@ -16,9 +16,9 @@ import NewJob from "./components/NewJob";
 import JobStats from "./components/JobStats";
 import AllJobs from "./components/AllJobs";
 import Profile from "./components/Profile";
+import UserData from "./Context/GlobalUserContext";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
-axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const reactRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +37,8 @@ const reactRouter = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     <Toaster />
-    <RouterProvider router={reactRouter}></RouterProvider>
+    <UserData>
+      <RouterProvider router={reactRouter}></RouterProvider>
+    </UserData>
   </>
 );

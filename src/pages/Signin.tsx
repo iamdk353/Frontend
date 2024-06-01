@@ -46,7 +46,7 @@ const Signin = () => {
       >
         <p className="text-3xl font-semibold ">SIGN IN</p>
         <div className="size-20 p-2 border rounded-full">
-          <img src={`./${profile}.svg`} alt={`profile pic`} />
+          <img src={`../../assets/${profile}.svg`} alt={`profile pic`} />
         </div>
         <div className="flex w-full h-15  justify-center">
           <div className="dropdown dropdown-right ">
@@ -66,7 +66,7 @@ const Signin = () => {
                       }}
                     >
                       <img
-                        src={`./${i}.svg`}
+                        src={`../../assets/${i}.svg`}
                         alt="profile pic"
                         className="size-12 "
                       />
