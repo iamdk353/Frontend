@@ -17,10 +17,7 @@ const Navbar = () => {
         const res = await axios.get("verify/whoami", getToken());
         setUserId(res.data._id);
         setNavstate(res.data);
-        if (userId) {
-          console.log(userId);
-        }
-        console.log(navState);
+        // console.log(navState);
       } catch (error) {
         console.log(error);
       }
