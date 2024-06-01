@@ -9,14 +9,20 @@ import {
 import Signin from "./pages/Signin";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
-import Index from "./pages/Index";
+// import Index from "./pages/Index";
 import AppContext from "./pages/userContext";
+import Layout from "./pages/Layout";
+import Index from "./pages/Index";
+import Jobs from "./pages/Jobs";
 const reactRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Signin />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<Index />} />
+      <Route path="/home" element={<Layout />}>
+        <Route path="" element={<Index />} />
+        <Route path="jobs" element={<Jobs />} />
+      </Route>
     </>
   )
 );
