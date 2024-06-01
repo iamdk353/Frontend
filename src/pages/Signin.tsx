@@ -6,7 +6,10 @@ const Signin = () => {
   const redirect = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [profile, setProfile] = useState(1);
   const [showpassword, setshowPassword] = useState(true);
+  const [location, setlocation] = useState("Bengaluru");
   const [submit, setSubmit] = useState(false);
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -21,6 +24,9 @@ const Signin = () => {
               {
                 username,
                 password,
+                name,
+                profile,
+                location,
               }
             );
             toast.success(res.data.msg);
@@ -39,6 +45,57 @@ const Signin = () => {
         }}
       >
         <p className="text-3xl font-semibold ">SIGN IN</p>
+        <div className="size-20 p-2 border rounded-full">
+          <img src={`./${profile}.svg`} alt={`profile pic`} />
+        </div>
+        <div className="flex w-full h-15  justify-center">
+          <div className="dropdown dropdown-right ">
+            <div tabIndex={0} role="button" className="btn m-1">
+              Change
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box w-[20vw] flex flex-row "
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+                return (
+                  <li key={i}>
+                    <a
+                      onClick={() => {
+                        setProfile(i);
+                      }}
+                    >
+                      <img
+                        src={`./${i}.svg`}
+                        alt="profile pic"
+                        className="size-12 "
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        <label className="input input-bordered flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="w-4 h-4 opacity-70"
+          >
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+          </svg>
+          <input
+            type="text"
+            className="grow"
+            placeholder="Name"
+            onChange={async (e) => {
+              setName(e.target.value);
+            }}
+          />
+        </label>
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,41 +115,6 @@ const Signin = () => {
               setUsername(e.target.value);
             }}
           />
-          {/* {username.length > 6 && (
-            <>
-              {userExist ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-4 bg-red-500 rounded-full"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-4 bg-green-500 rounded-full"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              )}
-            </>
-          )} */}
         </label>
         <label className="input input-bordered flex items-center gap-2">
           <svg
@@ -160,6 +182,29 @@ const Signin = () => {
               )}
             </div>
           )}
+        </label>
+        <label className="input input-bordered flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-4"
+          >
+            <path
+              fillRule="evenodd"
+              d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+              clipRule="evenodd"
+            />
+          </svg>
+
+          <input
+            type="text"
+            className="grow"
+            placeholder="Location"
+            onChange={async (e) => {
+              setlocation(e.target.value);
+            }}
+          />
         </label>
         <button
           className={`btn btn-prmiary ${submit ? "pointer-events-none" : ""}`}

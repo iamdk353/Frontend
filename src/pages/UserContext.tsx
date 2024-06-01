@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 import { user } from "./userInterface";
-const GlobalContext = createContext<user | undefined>(undefined);
+const GlobalContext = createContext<user | undefined | any>(undefined);
 
 export function useGlobalContext() {
   return useContext(GlobalContext);
