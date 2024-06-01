@@ -1,29 +1,16 @@
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
+import { user } from "./userInterface";
+const GlobalContext = createContext<user | undefined>(undefined);
 
-// Define the type for the context value
-interface UserContextType {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
+export function useGlobalContext() {
+  return useContext(GlobalContext);
 }
-
-// Create the context with a default value of undefined
-const GlobalUser = createContext<UserContextType | undefined>(undefined);
-
-//using global context hook
-export default function useUser() {
-  return useContext(GlobalUser);
-}
-
-// Define the provider component
-const UserContext = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<string>("he;;;o");
-  const sharedData = {
-    user,
-    setUser,
-  };
-
+const AppContext = ({ children }: { children: ReactNode }) => {
+  const [currentUser, setCurrentUser] = useState("");
   return (
-    <GlobalUser.Provider value={sharedData}>{children}</GlobalUser.Provider>
+    <GlobalContext.Provider value={{ currentUser, setCurrentUser }}>
+      {children}
+    </GlobalContext.Provider>
   );
 };
-export { UserContext };
+export default AppContext;

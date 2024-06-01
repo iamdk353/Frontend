@@ -10,6 +10,7 @@ import Signin from "./pages/Signin";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import Index from "./pages/Index";
+import AppContext from "./pages/userContext";
 const reactRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -22,6 +23,8 @@ const reactRouter = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     <Toaster />
-    <RouterProvider router={reactRouter}></RouterProvider>
+    <AppContext>
+      <RouterProvider router={reactRouter}></RouterProvider>
+    </AppContext>
   </>
 );
