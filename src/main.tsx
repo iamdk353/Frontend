@@ -36,7 +36,7 @@ const reactRouter = createBrowserRouter(
 );
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <Toaster />
+    <Toaster position="top-right" />
     <UserData>
       <RouterProvider router={reactRouter}></RouterProvider>
     </UserData>

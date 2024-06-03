@@ -7,8 +7,8 @@ const NewJob = () => {
   const initialState = {
     position: "",
     company: "",
-    joblocation: "",
-    Jobstats: "Pending",
+    location: "",
+    jobstatus: "Pending",
     jobtype: "Internship",
   };
   const [form, setform] = useState(initialState);
@@ -18,10 +18,16 @@ const NewJob = () => {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          console.log(form);
-          const res = await axios.post("/job", form, getToken());
-          toast.success(res.data.msg);
-          setform(initialState);
+          // console.log(form);
+          try {
+            const res = await axios.post("/job", form, getToken());
+            toast.success(res.data.msg);
+            console.log(res);
+            setform(initialState);
+          } catch (error: any) {
+            console.log(error);
+            toast.error(error.response.data);
+          }
         }}
       >
         <div className="w-[80vw] flex flex-wrap mt-10 space-x-2 p-10">
@@ -69,12 +75,12 @@ const NewJob = () => {
               type="text"
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
-              value={form.joblocation}
+              value={form.location}
               required
               onChange={(e) => {
                 setform((prevForm) => ({
                   ...prevForm,
-                  joblocation: e.target.value,
+                  location: e.target.value,
                 }));
               }}
             />
@@ -85,18 +91,18 @@ const NewJob = () => {
             </div>
             <select
               className="select select-bordered"
-              value={form.Jobstats}
+              value={form.jobstatus}
               onChange={(e) => {
                 setform((prevForm) => ({
                   ...prevForm,
-                  Jobstats: e.target.selectedOptions[0].innerHTML,
+                  jobstatus: e.target.selectedOptions[0].innerHTML,
                 }));
               }}
             >
               <option disabled>Pick one</option>
               <option>Pending</option>
               <option>Interview</option>
-              <option>Declinded</option>
+              <option>Declined</option>
             </select>
           </label>
           <label className="form-control w-full max-w-xs">
@@ -131,3 +137,4 @@ const NewJob = () => {
   );
 };
 export default NewJob;
+//company createdBy  jobstatus jobtype location position

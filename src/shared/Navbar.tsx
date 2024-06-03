@@ -29,15 +29,17 @@ const Navbar = () => {
       <div className="">
         <a className="btn btn-ghost text-xl no-animation">Jobstar</a>
       </div>
-      <div role="tablist" className="tabs tabs-boxed">
+      <a role="tablist" className="bg-base-200 ">
         {navLinks.map((i, index) => {
           return (
-            <Link to={i.to} key={index} role="tab" className={`tab `}>
-              {i.name}
-            </Link>
+            <a className="">
+              <Link to={i.to} key={index} role="tab" className={`tab `}>
+                {i.name}
+              </Link>
+            </a>
           );
         })}
-      </div>
+      </a>
       <div className="flex-none gap-2">
         <div className="badge p-3 bg-primary text-primary-content">
           {navState?.name}
