@@ -5,6 +5,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useNavigate,
 } from "react-router-dom";
 import Signin from "./pages/Signin";
 import Login from "./pages/Login";
@@ -17,15 +18,23 @@ import JobStats from "./components/JobStats";
 import AllJobs from "./components/AllJobs";
 import Profile from "./components/Profile";
 import UserData from "./Context/GlobalUserContext";
+import { useEffect } from "react";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
-
 const reactRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Signin />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/home" element={<Layout />}>
+      <Route
+        path="/home"
+        element={
+          <>
+            <Layout />
+            <Token></Token>
+          </>
+        }
+      >
         <Route path="" element={<NewJob />} />
         <Route path="alljobs" element={<AllJobs />} />
         <Route path="stats" element={<JobStats />} />
@@ -34,11 +43,26 @@ const reactRouter = createBrowserRouter(
     </>
   )
 );
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <>
-    <Toaster position="top-right" />
-    <UserData>
-      <RouterProvider router={reactRouter}></RouterProvider>
-    </UserData>
-  </>
-);
+ReactDOM.createRoot(document.getElementById("root")!).render(<App></App>);
+function Token({ childrens }: any) {
+  const redirect = useNavigate();
+
+  useEffect(() => {
+    console.log("token has changes");
+    if (!localStorage.getItem("token")) {
+      console.log("no token");
+      redirect("/login");
+    }
+  }, [localStorage.getItem("token")]);
+  return <>{childrens}</>;
+}
+function App() {
+  return (
+    <>
+      <Toaster position="top-right" />
+      <UserData>
+        <RouterProvider router={reactRouter}></RouterProvider>
+      </UserData>
+    </>
+  );
+}

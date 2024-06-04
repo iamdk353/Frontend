@@ -8,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showpassword, setshowPassword] = useState(true);
+  const [loading, setLoading] = useState(false);
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <form
@@ -15,13 +16,19 @@ const Login = () => {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
+            //  = await axios.post("auth/login", { username, password });
+            setLoading(true);
             const res = await axios.post("auth/login", { username, password });
+            // console.log((await toastres).data);
             localStorage.setItem("token", res.data.msg);
             toast.success(res.data.info);
+            setLoading(false);
             redirect("/home");
           } catch (error: any) {
             console.log(error);
-            toast.error(error.response.data.msg);
+            setLoading(false);
+            toast.error(error.message);
+            //if (error.response.data.msg) toast.error(error.response.data.msg);
           }
           // console.log({ username, password });
         }}
@@ -114,8 +121,8 @@ const Login = () => {
             </div>
           )}
         </label>
-        <button className="btn btn-prmiary" type="submit">
-          SUBMIT{" "}
+        <button className={`btn btn-prmiary`} type="submit" disabled={loading}>
+          {loading ? <div className="loading"></div> : "Submit"}
         </button>
         <p className="text-xs">
           Be a Registred user ?{" "}

@@ -2,14 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import getToken from "../helper/getToken";
 import { useGlobalUser } from "../Context/GlobalUserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import user from "../interface/user";
 import { navLinks } from "../helper/navLinks";
+import toast from "react-hot-toast";
 // import user from "../interface/user";
 
 const Navbar = () => {
   const { userId, setUserId } = useGlobalUser();
   const [navState, setNavstate] = useState<user>();
+  const redirect = useNavigate();
 
   useEffect(() => {
     async function getUser() {
@@ -29,17 +31,15 @@ const Navbar = () => {
       <div className="">
         <a className="btn btn-ghost text-xl no-animation">Jobstar</a>
       </div>
-      <a role="tablist" className="bg-base-200 ">
+      <div role="tablist" className="bg-base-200 hidden md:block">
         {navLinks.map((i, index) => {
           return (
-            <a className="">
-              <Link to={i.to} key={index} role="tab" className={`tab `}>
-                {i.name}
-              </Link>
-            </a>
+            <Link to={i.to} key={index} role="tab" className={`tab `}>
+              {i.name}
+            </Link>
           );
         })}
-      </a>
+      </div>
       <div className="flex-none gap-2">
         <div className="badge p-3 bg-primary text-primary-content">
           {navState?.name}
@@ -59,13 +59,43 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 "
           >
+            {navLinks.map((i, index) => {
+              return (
+                <div className="md:hidden " key={index}>
+                  <li>
+                    <Link
+                      to={i.to}
+                      key={index}
+                      role="tab"
+                      className={`tab w-full flex justify-around`}
+                    >
+                      {i.name}
+                      <img
+                        src={i.icon}
+                        alt={i.to + " icon"}
+                        className="size-6 "
+                      />
+                    </Link>
+                  </li>
+                </div>
+              );
+            })}
             <li>
-              <a className="justify-between">Profile</a>
-            </li>
-            <li>
-              <a>Logout</a>
+              <a
+                className="flex justify-center"
+                onClick={() => {
+                  localStorage.clear();
+                  toast.loading("Logging out", { duration: 1300 });
+                  setTimeout(() => {
+                    redirect("/login");
+                  }, 1500);
+                }}
+              >
+                Logout
+                <img src="../../assets/logout.svg" alt="" className=" size-6" />
+              </a>
             </li>
           </ul>
         </div>

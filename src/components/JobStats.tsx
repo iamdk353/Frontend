@@ -91,7 +91,7 @@ const JobStats = () => {
       </div>
       <div className="card w-96 bg-base-200 shadow-xl flex justify-center items-center p-4  border-b-2 border-b-error">
         <div className="flex space-x-5">
-          <div className="card-title ">Interview jobs</div>
+          <div className="card-title ">Declined jobs</div>
           <div className="bg-error p-3 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
