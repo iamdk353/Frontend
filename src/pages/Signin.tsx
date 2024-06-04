@@ -206,10 +206,7 @@ const Signin = () => {
             }}
           />
         </label>
-        <button
-          className={`btn btn-prmiary ${submit ? "pointer-events-none" : ""}`}
-          type="submit"
-        >
+        <button className={`btn btn-prmiary `} type="submit" disabled={submit}>
           {submit ? (
             <span className="loading loading-spinner loading-xs"></span>
           ) : (
