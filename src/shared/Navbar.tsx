@@ -59,7 +59,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 "
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52 "
           >
             {navLinks.map((i, index) => {
               return (
@@ -72,11 +72,6 @@ const Navbar = () => {
                       className={`tab w-full flex justify-around`}
                     >
                       {i.name}
-                      <img
-                        src={i.icon}
-                        alt={i.to + " icon"}
-                        className="size-6 "
-                      />
                     </Link>
                   </li>
                 </div>
@@ -94,7 +89,6 @@ const Navbar = () => {
                 }}
               >
                 Logout
-                <img src="../../assets/logout.svg" alt="" className=" size-6" />
               </a>
             </li>
           </ul>
