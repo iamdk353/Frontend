@@ -27,7 +27,7 @@ const Navbar = () => {
     getUser();
   }, [userId]);
   return (
-    <div className="navbar bg-base-100 px-10 flex justify-between">
+    <div className="navbar bg-base-100 px-10 flex justify-between ">
       <div className="">
         <a className="btn btn-ghost text-xl no-animation">Jobstar</a>
       </div>

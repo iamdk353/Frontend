@@ -43,8 +43,9 @@ const reactRouter = createBrowserRouter(
     </>
   )
 );
-ReactDOM.createRoot(document.getElementById("root")!).render(<App></App>);
-function Token({ childrens }: any) {
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+root.render(<App></App>);
+function Token() {
   const redirect = useNavigate();
 
   useEffect(() => {
@@ -54,7 +55,7 @@ function Token({ childrens }: any) {
       redirect("/login");
     }
   }, [localStorage.getItem("token")]);
-  return <>{childrens}</>;
+  return <></>;
 }
 function App() {
   return (
